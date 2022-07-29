@@ -60,31 +60,37 @@ modules:
       - type: file
         only-arches:
           - x86_64
-        url: https://github.com/ferdium/ferdium-app/releases/download/v6.0.0-nightly.66/ferdium_6.0.0-nightly.66_amd64.deb
-        sha256: a858e698c7248bbf31e4e60d26bcae83e7af9e1049ee43913e5fe90000d1253e
+        url: https://github.com/ferdium/ferdium-app/releases/download/v6.0.0-beta.3/Ferdium-linux-6.0.0-beta.3-amd64.deb
+        sha256: 18578c47b80a319517c61f337d41272e871e9ed483de4f38f706d8f79d1f9b79
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ferdium/ferdium-app/releases
-          version-query: "map(select(.tag_name | contains(\"beta\"))) | .[0].tag_name | sub(\"^v\"; \"\")"
-          url-query: ".[] | select(.tag_name==\"v\" + $version ).assets[] | select(.name==\"Ferdium-linux-\" + $version + \"-amd64.deb\") | .browser_download_url"
+          version-query: map(select(.tag_name | contains("beta"))) | .[0].tag_name
+            | sub("^v"; "")
+          url-query: .[] | select(.tag_name=="v" + $version ).assets[] | select(.name=="Ferdium-linux-"
+            + $version + "-amd64.deb") | .browser_download_url
       - type: file
         only-arches:
           - aarch64
-        url: https://github.com/ferdium/ferdium-app/releases/download/v6.0.0-nightly.66/ferdium_6.0.0-nightly.66_arm64.deb
-        sha256: 7c89c2219d252b71b846f409d3f014d3e26ade1b4930b7e48a7f95dc7949063b
+        url: https://github.com/ferdium/ferdium-app/releases/download/v6.0.0-beta.3/Ferdium-linux-6.0.0-beta.3-arm64.deb
+        sha256: a94f2fb15c7aeb02183c852f83702bd6851de6396436f01d8154296c0a2d62e7
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ferdium/ferdium-app/releases
-          version-query: "map(select(.tag_name | contains(\"beta\"))) | .[0].tag_name | sub(\"^v\"; \"\")"
-          url-query: ".[] | select(.tag_name==\"v\" + $version ).assets[] | select(.name==\"Ferdium-linux-\" + $version + \"-arm64.deb\") | .browser_download_url"
+          version-query: map(select(.tag_name | contains("beta"))) | .[0].tag_name
+            | sub("^v"; "")
+          url-query: .[] | select(.tag_name=="v" + $version ).assets[] | select(.name=="Ferdium-linux-"
+            + $version + "-arm64.deb") | .browser_download_url
       - type: file
-        url: https://github.com/ferdium/ferdium-app/archive/refs/tags/v6.0.0-nightly.66.tar.gz
-        sha256: a1bea71d54eb568823c21c07f312437a0b69063b1bfa2384cbf58ea0384fcdcd
+        url: https://github.com/ferdium/ferdium-app/releases/download/v6.0.0-beta.3/Ferdium-linux-6.0.0-beta.3.tar.gz
+        sha256: 6f31174bf0f7e2145a84c7a3c5490bf383310776a9182a8e2d0c115f1c36db68
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ferdium/ferdium-app/releases
-          version-query: "map(select(.tag_name | contains(\"beta\"))) | .[0].tag_name | sub(\"^v\"; \"\")"
-          url-query: ".[] | select(.tag_name==\"v\" + $version ).assets[] | select(.name==\"Ferdium-linux-\" + $version + \".tar.gz\") | .browser_download_url"
+          version-query: map(select(.tag_name | contains("beta"))) | .[0].tag_name
+            | sub("^v"; "")
+          url-query: .[] | select(.tag_name=="v" + $version ).assets[] | select(.name=="Ferdium-linux-"
+            + $version + ".tar.gz") | .browser_download_url
       - type: script
         dest-filename: ferdium.sh
         commands:
